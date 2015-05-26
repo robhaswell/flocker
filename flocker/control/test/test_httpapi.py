@@ -45,6 +45,7 @@ from .._config import (
     FlockerConfiguration, FigConfiguration, model_from_configuration)
 from .test_config import COMPLEX_APPLICATION_YAML, COMPLEX_DEPLOYMENT_YAML
 from ... import __version__
+from ...testtools import REALISTIC_BLOCKDEVICE_SIZE
 
 
 class APITestsMixin(object):
@@ -1691,7 +1692,7 @@ class CreateDatasetTestsMixin(APITestsMixin):
         """
         return self.assertResult(
             b"POST", b"/configuration/datasets",
-            {},
+            {u"maximum_size": REALISTIC_BLOCKDEVICE_SIZE},
             BAD_REQUEST, {
                 u'description':
                     u"The provided JSON doesn't match the required schema.",
