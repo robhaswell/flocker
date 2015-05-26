@@ -625,6 +625,10 @@ ConfigurationDatasetsCreateSchemaTests = build_schema_test(
             {u"metadata": {},
              u"maximum_size": 1024 * 1024 * 1024,
              u"dataset_id": u"x" * 36},
+            # missing maximum_size
+            {u"primary": a_uuid,
+             u"metadata": {},
+             u"dataset_id": u"x" * 36},
         ]
     ),
     passing_instances=CONFIGURATION_DATASETS_PASSING_INSTANCES,
