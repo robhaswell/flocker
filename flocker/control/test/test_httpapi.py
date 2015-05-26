@@ -1701,6 +1701,24 @@ class CreateDatasetTestsMixin(APITestsMixin):
             }
         )
 
+    def test_missing_maximum_size(self):
+        """
+        If a ``POST`` request made to the endpoint includes a body which
+        doesn't include a maximum_size, the response is an error indication
+        a validation failure.
+        """
+        return self.assertResult(
+            b"POST", b"/configuration/datasets",
+            {u"primary": self.NODE_A},
+            BAD_REQUEST, {
+                u'description':
+                    u"The provided JSON doesn't match the required schema.",
+                u'errors': [
+                    u"'maximum_size' is a required property"
+                ]
+            }
+        )
+
     def _dataset_id_collision_test(self, primary, modifier=lambda uuid: uuid):
         """
         Assert that an attempt to create a dataset with a dataset_id that is
